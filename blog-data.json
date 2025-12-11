@@ -5,21 +5,24 @@
       "title": "业余无线电通联日志测试",
       "summary": "0000年0月通联记录汇总 - 共00次通联",
       "date": "2024-01-25",
-      "filename": "blog1.html"
+      "filename": "blog1.html",
+      "keywords": ["业余无线电", "通联日志", "电台", "天线"]
     },
     {
       "id": 2,
       "title": "我的第一篇技术博客",
       "summary": "分享一些关于业余无线电的心得体会",
       "date": "2024-02-15",
-      "filename": "blog2.html"
+      "filename": "blog2.html",
+      "keywords": ["业余无线电", "心得", "技术博客"]
     },
     {
       "id": 3,
       "title": "FT8模式入门指南",
       "summary": "数字模式FT8的操作方法和技巧",
       "date": "2024-03-20",
-      "filename": "blog3.html"
+      "filename": "blog3.html",
+      "keywords": ["FT8", "数字模式", "业余无线电", "弱信号通联"]
     }
   ]
 }
