@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: #f5f5f5;
@@ -19,18 +21,21 @@
             max-width: 800px;
             margin: 0 auto;
         }
+
         .container {
             background-color: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
             color: #000;
             border-bottom: 3px solid #000;
             padding-bottom: 10px;
             margin-bottom: 30px;
         }
+
         h2 {
             color: #333;
             margin-top: 30px;
@@ -38,30 +43,37 @@
             border-left: 4px solid #000;
             padding-left: 10px;
         }
+
         .contact-info {
             background-color: #f9f9f9;
             padding: 15px;
             border-radius: 4px;
             margin-bottom: 20px;
         }
+
         .contact-info p {
             margin: 10px 0;
         }
+
         .contact-info strong {
             color: #000;
             display: inline-block;
             width: 100px;
         }
+
         a {
             color: #0066cc;
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
+
         .blog-list {
             margin-top: 20px;
         }
+
         .blog-item {
             background-color: #f9f9f9;
             padding: 15px;
@@ -69,24 +81,29 @@
             border-radius: 4px;
             border-left: 3px solid #ccc;
         }
+
         .blog-item h3 {
             margin-bottom: 10px;
             color: #000;
         }
+
         .blog-item p {
             color: #666;
             margin-bottom: 10px;
         }
+
         .blog-meta {
             font-size: 12px;
             color: #999;
         }
+
         /* 搜索框样式 */
         .search-box {
             margin-bottom: 20px;
             display: flex;
             gap: 10px;
         }
+
         #searchInput {
             flex: 1;
             padding: 10px;
@@ -94,6 +111,7 @@
             border-radius: 4px;
             font-size: 14px;
         }
+
         .search-btn {
             padding: 10px 20px;
             background-color: #000;
@@ -102,9 +120,11 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         .search-btn:hover {
             background-color: #333;
         }
+
         .clear-btn {
             padding: 10px 20px;
             background-color: #f0f0f0;
@@ -113,11 +133,13 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         .clear-btn:hover {
             background-color: #ddd;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>欢迎！这里是BA4RDA，73！</h1>
@@ -127,9 +149,10 @@
             <h2>联系方式</h2>
             <div class="contact-info">
                 <p><strong>邮箱：</strong>192388740@qq.com</p>
-                <p><strong>微信：</strong>BA4RDA</p>
-                <p><strong>QQ：</strong>1923888740</p>
-                <p><strong>github：</strong>github.com/eeecat384</p>
+                <p><strong>GitHub：</strong><a href="https://github.com/eeecat384" target="_blank"
+                        rel="noopener noreferrer">github.com/eeecat384</a></p>
+                <p><strong>B站：</strong><a href="https://space.bilibili.com/293218124?spm_id_from=333.1007.0.0"
+                        target="_blank" rel="noopener noreferrer">BA4RDA-谔猫</a></p>
                 <p><strong>其他平台：</strong>搜索"谔猫"或"BA4RDA"</p>
             </div>
         </section>
@@ -137,14 +160,14 @@
         <!-- 博客区域 -->
         <section>
             <h2>博客</h2>
-            
+
             <!-- 搜索框 -->
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="搜索博客标题或内容关键词...">
                 <button class="search-btn" onclick="searchBlogs()">搜索</button>
                 <button class="clear-btn" onclick="clearSearch()">清除</button>
             </div>
-            
+
             <div class="blog-list" id="blogList"></div>
         </section>
     </div>
@@ -155,7 +178,7 @@
         let filteredBlogs = []; // 存储过滤后的博客数据
 
         // 页面加载时初始化
-        window.onload = async function() {
+        window.onload = async function () {
             await loadBlogs();
         };
 
@@ -166,7 +189,7 @@
                 // 从GitHub仓库获取博客索引文件
                 const response = await fetch('blog-data.json');
                 const data = await response.json();
-                allBlogs = data.blogs;
+                allBlogs = data.blogs.reverse();
                 filteredBlogs = [...allBlogs];
                 renderBlogs(filteredBlogs);
             } catch (error) {
@@ -179,12 +202,12 @@
         function renderBlogs(blogs) {
             const blogList = document.getElementById('blogList');
             blogList.innerHTML = '';
-            
+
             if (blogs.length === 0) {
                 blogList.innerHTML = '<p>没有找到相关博客</p>';
                 return;
             }
-            
+
             blogs.forEach(blog => {
                 const blogItem = document.createElement('div');
                 blogItem.className = 'blog-item';
@@ -198,53 +221,53 @@
         }
 
         // 搜索博客功能（支持多词搜索和权重计算）
-function searchBlogs() {
-    const query = document.getElementById('searchInput').value.trim().toLowerCase();
-    
-    if (!query) {
-        filteredBlogs = [...allBlogs];
-    } else {
-        // 将查询拆分为多个关键词（按空格分隔）
-        const keywords = query.split(/\s+/).filter(k => k.length > 0);
-        
-        // 计算每篇博客的相关性得分
-        const scoredBlogs = allBlogs.map(blog => {
-            let totalScore = 0;
-            
-            // 对每个关键词分别计算得分并累加
-            keywords.forEach(keyword => {
-                let score = 0;
-                
-                // 标题匹配（权重：5）
-                const titleMatches = blog.title.toLowerCase().match(new RegExp(keyword, 'g'));
-                const titleMatchCount = titleMatches ? titleMatches.length : 0;
-                score += titleMatchCount * 5;
-                
-                // 摘要/内容匹配（权重：1）
-                const contentMatches = blog.summary.toLowerCase().match(new RegExp(keyword, 'g'));
-                const contentMatchCount = contentMatches ? contentMatches.length : 0;
-                score += contentMatchCount * 1;
-                
-                // 关键词匹配（权重：5）
-                if (blog.keywords && blog.keywords.length > 0) {
-                    const keywordText = blog.keywords.join('、').toLowerCase();
-                    const keywordMatches = keywordText.match(new RegExp(keyword, 'g'));
-                    const keywordMatchCount = keywordMatches ? keywordMatches.length : 0;
-                    score += keywordMatchCount * 5;
-                }
-                
-                totalScore += score;
-            });
-            
-            return { ...blog, score: totalScore };
-        }).filter(blog => blog.score > 0);
-        
-        // 按得分从高到低排序
-        filteredBlogs = scoredBlogs.sort((a, b) => b.score - a.score);
-    }
-    
-    renderBlogs(filteredBlogs);
-}
+        function searchBlogs() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+
+            if (!query) {
+                filteredBlogs = [...allBlogs];
+            } else {
+                // 将查询拆分为多个关键词（按空格分隔）
+                const keywords = query.split(/\s+/).filter(k => k.length > 0);
+
+                // 计算每篇博客的相关性得分
+                const scoredBlogs = allBlogs.map(blog => {
+                    let totalScore = 0;
+
+                    // 对每个关键词分别计算得分并累加
+                    keywords.forEach(keyword => {
+                        let score = 0;
+
+                        // 标题匹配（权重：5）
+                        const titleMatches = blog.title.toLowerCase().match(new RegExp(keyword, 'g'));
+                        const titleMatchCount = titleMatches ? titleMatches.length : 0;
+                        score += titleMatchCount * 5;
+
+                        // 摘要/内容匹配（权重：1）
+                        const contentMatches = blog.summary.toLowerCase().match(new RegExp(keyword, 'g'));
+                        const contentMatchCount = contentMatches ? contentMatches.length : 0;
+                        score += contentMatchCount * 1;
+
+                        // 关键词匹配（权重：5）
+                        if (blog.keywords && blog.keywords.length > 0) {
+                            const keywordText = blog.keywords.join('、').toLowerCase();
+                            const keywordMatches = keywordText.match(new RegExp(keyword, 'g'));
+                            const keywordMatchCount = keywordMatches ? keywordMatches.length : 0;
+                            score += keywordMatchCount * 5;
+                        }
+
+                        totalScore += score;
+                    });
+
+                    return { ...blog, score: totalScore };
+                }).filter(blog => blog.score > 0);
+
+                // 按得分从高到低排序
+                filteredBlogs = scoredBlogs.sort((a, b) => b.score - a.score);
+            }
+
+            renderBlogs(filteredBlogs);
+        }
 
         // 清除搜索
         function clearSearch() {
@@ -254,10 +277,10 @@ function searchBlogs() {
         }
 
         // 支持回车键触发搜索
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('searchInput');
             if (searchInput) {
-                searchInput.addEventListener('keypress', function(e) {
+                searchInput.addEventListener('keypress', function (e) {
                     if (e.key === 'Enter') {
                         searchBlogs();
                     }
@@ -266,4 +289,5 @@ function searchBlogs() {
         });
     </script>
 </body>
+
 </html>

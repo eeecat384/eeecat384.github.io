@@ -2,27 +2,19 @@
   "blogs": [
     {
       "id": 1,
-      "title": "业余无线电通联日志测试",
-      "summary": "0000年0月通联记录汇总 - 共00次通联",
-      "date": "2024-01-25",
-      "filename": "blog1.html",
-      "keywords": ["业余无线电", "通联日志", "电台", "天线"]
+      "title": "芯片（chip）认成薯片（chip）？国产AI抄袭了国外AI成果？",
+      "summary": "你可能会有的对AI的误解",
+      "date": "2025-12-22",
+      "filename": "blog/blog1.html",
+      "keywords": ["AI", "LLM", "技术博客"]
     },
     {
       "id": 2,
-      "title": "我的第一篇技术博客",
-      "summary": "分享一些关于业余无线电的心得体会",
-      "date": "2024-02-15",
-      "filename": "blog2.html",
-      "keywords": ["业余无线电", "心得", "技术博客"]
-    },
-    {
-      "id": 3,
-      "title": "FT8模式入门指南",
-      "summary": "数字模式FT8的操作方法和技巧",
-      "date": "2024-03-20",
-      "filename": "blog3.html",
-      "keywords": ["FT8", "数字模式", "业余无线电", "弱信号通联"]
+      "title": "AI是怎么运作的——以GPT-2为例",
+      "summary": "深入了解大型语言模型的工作原理",
+      "date": "2025-12-22",
+      "filename": "blog/blog2.html",
+      "keywords": ["AI", "LLM", "技术博客"]
     }
   ]
 }

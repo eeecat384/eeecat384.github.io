@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI是怎么运作的——以GPT-2为例 - BA4RDA的个人网站</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f5; color: #333; line-height: 1.6;
+            padding: 20px; max-width: 800px; margin: 0 auto;
+        }
+        .container {
+            background-color: white; padding: 30px; border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #000; border-bottom: 3px solid #000;
+            padding-bottom: 10px; margin-bottom: 20px;
+        }
+        .meta {
+            color: #666; margin-bottom: 20px; padding: 10px;
+            background-color: #f9f9f9; border-radius: 4px;
+        }
+        h3 {
+            margin-top: 25px; margin-bottom: 15px; color: #000;
+            border-left: 4px solid #000; padding-left: 10px;
+        }
+        .back-link {
+            display: inline-block; margin-top: 30px; padding: 10px 20px;
+            background-color: #f0f0f0; border-radius: 4px; text-decoration: none;
+            color: #333;
+        }
+        .back-link:hover { background-color: #e0e0e0; }
+        a {
+            color: #1a73e8; text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI是怎么运作的——以GPT-2为例</h1>
+        <div class="meta">
+            <div>发布时间：2025-12-22</div>
+            <div>关键词：AI，LLM，技术博客</div>
+        </div>
+
+        <!-- 博客内容开始 -->
+        <p>开始写之前没想到这玩意工作量这么大.......然后搁置去学C语言了，学完C没忍住去学了stm32，stm32概念真的好多，且让我报一下菜名：</p>
+        <p>&nbsp;</p>
+        <ul>
+            <li>APB: Advanced Peripheral Bus (高级外设总线)</li>
+            <li>AHB: Advanced High-performance Bus (高级高性能总线)</li>
+            <li>PPB: Private Peripheral Bus (私有外设总线)</li>
+            <li>GPIO: General Purpose Input/Output (通用输入/输出)</li>
+            <li>AFIO: Alternate Function Input/Output (复用功能输入/输出)</li>
+            <li>Thumb: Thumb Instruction Set (Thumb 指令集)</li>
+            <li>Banked: Banked Register (分组寄存器)</li>
+            <li>MSP: Main Stack Pointer (主堆栈指针)</li>
+            <li>PSP: Process Stack Pointer (进程堆栈指针)</li>
+            <li>Tail-Chaining: Tail-Chaining (咬尾中断)</li>
+            <li>SRAM: Static Random Access Memory (静态随机存取存储器)</li>
+            <li>RAM: Random Access Memory (随机存取存储器)</li>
+            <li>ROM: Read-Only Memory (只读存储器)</li>
+            <li>DRAM: Dynamic Random Access Memory (动态随机存取存储器)</li>
+            <li>MPU Region: Memory Protection Unit Region (存储器保护单元区域)</li>
+            <li>NVIC: Nested Vectored Interrupt Controller (嵌套向量中断控制器)</li>
+            <li>Fault: Fault (异常/错误)</li>
+            <li>Flash: Flash Memory (闪存)</li>
+            <li>Periph: Peripheral (外设)</li>
+            <li>RCC: Reset and Clock Control (复位和时钟控制)</li>
+            <li>SDIO: Secure Digital Input/Output (安全数字输入/输出)</li>
+            <li>DMA: Direct Memory Access (直接存储器访问)</li>
+            <li>EXTI: External Interrupt/Event Controller (外部中断/事件控制器)</li>
+            <li>SysTick: System Timer (系统滴答定时器)</li>
+            <li>ICode: Instruction Code Bus (指令代码总线)</li>
+            <li>DCode: Data Code Bus (数据代码总线)</li>
+        </ul>
+        <p>&nbsp;</p>
+        <p>这些只是我看了参考手册几个小时（加上问ai的时间）看到的概念（理解这些概念肯定是不可能的，只能说有个印象）</p>
+        <p>&nbsp;</p>
+        <p>这下也能理解我为什么不想写了吧......</p>
+        <p>&nbsp;</p>
+        <p>所以，我就放几个在写这个文章的过程中参考的几篇资料，我想写的基本上这里面都有（说的好听叫深度理解，融合产出。说的不好听就是抄的wwwwww）</p>
+        <p>&nbsp;</p>
+        <ul>
+            <li><a href="https://blog.csdn.net/v_JULY_v/article/details/51812459?fromshare=blogdetail&sharetype=blogdetail&sharerId=51812459&sharerefer=PC&sharesource=2502_92292360&sharefrom=from_link" target="_blank">CNN笔记：通俗理解卷积神经网络</a></li>
+            <li><a href="https://blog.csdn.net/Python_cocola/article/details/155521876" target="_blank">从入门到精通，循环神经网络（RNN）这一篇彻底讲透！</a></li>
+            <li><a href="https://zhuanlan.zhihu.com/p/123211148" target="_blank">史上最详细循环神经网络讲解（RNN/LSTM/GRU）</a></li>
+            <li><a href="https://arxiv.org/abs/1706.03762" target="_blank">《Attention Is All You Need》</a></li>
+            <li><a href="https://zhuanlan.zhihu.com/p/703292893" target="_blank">常学常新：《Attention Is All You Need》万字解读！</a></li>
+            <li><a href="https://www.bilibili.com/video/BV1uu4y1m7ak/?share_source=copy_web&vd_source=651a470a3f58f326e2a9cbe220814164" target="_blank">关于 AI 的深度研究：ChatGPT 正在产生心智吗？</a></li>
+        </ul>
+        <p>&nbsp;</p>
+        <p>最后那个视频是优先级最高的的，其他都是可选项，但多学点总没坏处嘛。</p>
+        <p>&nbsp;</p>
+        <p>等以后有时间再写吧（挖坑）</p>
+        <p>&nbsp;</p>
+        <p><em>2025.12.22下午，遗憾收工。</em></p>
+        <a href="../index.html" class="back-link">返回主页</a>
+    </div>
+</body>
+</html>
