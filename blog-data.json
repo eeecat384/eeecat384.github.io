@@ -15,6 +15,30 @@
       "date": "2025-12-22",
       "filename": "blog/blog2.html",
       "keywords": ["AI", "LLM", "技术博客"]
+    },
+    {
+      "id": 3,
+      "title": "焊接经验分享",
+      "summary": "分享一些焊接相关经验与技巧",
+      "date": "2025-12-24",
+      "filename": "blog/blog3.html",
+      "keywords": ["经验分享", "焊接", "电子技术"]
+    },
+    {
+      "id": 4,
+      "title": "不能过圣诞节？谁家大清残党",
+      "summary": "",
+      "date": "2025-12-25",
+      "filename": "blog/blog4.html",
+      "keywords": ["观点博客", "社会现象"]
+    },
+    {
+      "id": 5,
+      "title": "m3u8转MP4教程（针对夸克下载）",
+      "summary": "使用windows系统",
+      "date": "2025-12-26",
+      "filename": "blog/blog5.html",
+      "keywords": ["m3u8", "教程"]
     }
   ]
 }

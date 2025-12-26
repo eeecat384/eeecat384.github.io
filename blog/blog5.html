@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>m3u8转MP4教程（针对夸克下载） - BA4RDA 的个人网站</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f5f5; color: #333; line-height: 1.6;
+            padding: 20px; max-width: 800px; margin: 0 auto;
+        }
+        .container {
+            background-color: white; padding: 30px; border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #000; border-bottom: 3px solid #000;
+            padding-bottom: 10px; margin-bottom: 20px;
+        }
+        .meta {
+            color: #666; margin-bottom: 20px; padding: 10px;
+            background-color: #f9f9f9; border-radius: 4px;
+        }
+        h3 {
+            margin-top: 25px; margin-bottom: 15px; color: #000;
+            border-left: 4px solid #000; padding-left: 10px;
+        }
+        .back-link {
+            display: inline-block; margin-top: 30px; padding: 10px 20px;
+            background-color: #f0f0f0; border-radius: 4px; text-decoration: none;
+            color: #333;
+        }
+        .back-link:hover { background-color: #e0e0e0; }
+        a {
+            color: #1a73e8; text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        pre {
+            background: #f6f8fa;
+            border-radius: 6px;
+            font-size: 85%;
+            line-height: 1.45;
+            overflow: auto;
+            padding: 16px;
+            position: relative;
+            margin: 16px 0;
+        }
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+        }
+        .copy-btn {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            background: #1b1f230d;
+            border: 1px solid #1b1f230d;
+            border-radius: 6px;
+            color: #24292f;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 1;
+            padding: 4px 8px;
+            user-select: none;
+        }
+        .copy-btn:hover {
+            background: #1b1f2326;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>m3u8转MP4教程（针对夸克下载）</h1>
+        <div class="meta">
+            <div>发布时间：2025-12-26</div>
+            <div>关键词：m3u8, 教程</div>
+        </div>
+
+        <p>注意：此教程针对手机夸克下载的 m3u8 视频，其他来源下载的可能会有不同，操作也不一样，后面我可能会出相关原理教学（挖坑），这样你遇到不同的 m3u8 文件都会转换了。</p>
+        <p>&nbsp;</p>
+        <p>本教程使用 Windows 的 Win11 系统，如果是 Win10 及以下系统或者动过右键菜单，“右键，选择‘在终端中打开’”的操作应改为“Shift + 右键，选择‘在此处打开 PowerShell 窗口’”。</p>
+        <p>&nbsp;</p>
+        <p>任何一步操作有红色报错的话，首先检查自己有没有严格按照教程走，然后再把报错和这份文档复制给 AI，找我解决的话请贴出和 AI 对话的记录或者 v 我 50，任选其一。</p>
+        <p>&nbsp;</p>
+        <p>使用的 .py 文件在我 GitHub 仓库中eecat384.github.io/blog_resoures/blog4_m3u8转MP4教程（针对夸克下载）</p>
+        <p>&nbsp;</p>
+        <p>如果上不了 GitHub，可新建一个文本文件，把下面的代码粘贴进去：</p>
+
+        <h3>fix_m3u8.py</h3>
+        <pre><code id="code1">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import re, pathlib
+
+src = pathlib.Path('playlist.m3u8')
+out = pathlib.Path('local.m3u8')
+
+lines   = src.read_text(encoding='utf-8').splitlines()
+new_lines, idx = [], 0
+
+for raw in lines:
+    line = raw.strip()
+    # 1. 保留所有非 ts 行（含 KEY、IV、EXTINF 等）
+    if not line.endswith('.ts') and '.ts?' not in line:
+        new_lines.append(raw + '\n')
+        continue
+    # 2. 遇到 ts 行（无论有没有参数）→ 替换成编号
+    new_lines.append(f'{idx}.ts\n')
+    idx += 1
+
+out.write_text(''.join(new_lines), encoding='utf-8')
+print(f'✅ 已生成 {out} ，共 {idx} 个 ts 段。')
+</code><button class="copy-btn" onclick="copyCode('code1')">复制</button></pre>
+
+        <p>然后保存，退出，将这个文件重命名为 <strong>fix_m3u8.py</strong>。</p>
+
+        <h3>第一步</h3>
+        <p>检查自己有没有装 ffmpeg 和 python 环境，如果不知道这俩是什么，那大概率就是没装，搜网上教程去。</p>
+
+        <h3>第二步</h3>
+        <p>文件名称应该是 0,1,2,3 这种无后缀文件，我们需要给他们加 ts 后缀。</p>
+        <p>在你下载的视频文件夹内部（就是你能看到 0,1,2,3 这种文件的文件夹内部）右键，选择“在终端中打开”，把下面的代码复制进去，回车：</p>
+        <pre><code id="code2">Get-ChildItem -File | Where-Object { $_.Name -match '^\d+$' } | Rename-Item -NewName { $_.Name + '.ts' }
+</code><button class="copy-btn" onclick="copyCode('code2')">复制</button></pre>
+        <p>然后检查一下文件是否都有了 .ts 后缀。</p>
+
+        <h3>第三步</h3>
+        <p>把那个名字最长的文件重命名为</p>
+        <pre><code id="code3">playlist.m3u8
+</code><button class="copy-btn" onclick="copyCode('code3')">复制</button></pre>
+        <p>将 .py 文件复制进下载的视频文件夹内部，在文件夹内右键，选择“在此处打开终端”，把下面的代码复制进去，回车：</p>
+        <pre><code id="code4">python fix_m3u8.py
+</code><button class="copy-btn" onclick="copyCode('code4')">复制</button></pre>
+        <p>然后检查一下生成的 <strong>local.m3u8</strong> 文件内部是否有类似于</p>
+        <pre><code id="code5">0.ts
+#EXTINF:8.333333,
+1.ts
+#EXTINF:8.333333,
+</code><button class="copy-btn" onclick="copyCode('code5')">复制</button></pre>
+        <p>如果有，证明成功（那个 8.333333 是单个视频的时长，和我的不一样也没关系）。</p>
+
+        <h3>第四步</h3>
+        <p>看你下载的视频文件夹内是否有类似 <strong>0.key</strong> 的文件，若有，用记事本或者 VS Code 等打开 <strong>local.m3u8</strong> 文件，找到类似：</p>
+        <pre><code id="code6">#EXT-X-KEY:METHOD=AES-128,URI="https://xxxx.com/0.key"
+</code><button class="copy-btn" onclick="copyCode('code6')">复制</button></pre>
+        <p>改成：</p>
+        <pre><code id="code7">#EXT-X-KEY:METHOD=AES-128,URI="0.key"
+</code><button class="copy-btn" onclick="copyCode('code7')">复制</button></pre>
+        <p>注：0.key 和你文件内的 16kb 大小的文件名字对应。</p>
+
+        <h3>第五步</h3>
+        <p>把 <strong>playlist.m3u8</strong> 删除，在你下载的视频文件夹内部右键，选择“在终端中打开”，把下面的代码复制进去，回车：</p>
+        <pre><code id="code8">ffmpeg -allowed_extensions ALL -i local.m3u8 -c copy output.mp4
+       
+</code><button class="copy-btn" onclick="copyCode('code8')">复制</button></pre>
+        <p style="margin-top: 25px; text-align: right; color: #666;">
+            <em>2025.12.26早，收工。</em>
+        </p>
+
+        <a href="../index.html" class="back-link">返回主页</a>
+    </div>
+
+    <script>
+        function copyCode(id) {
+            const code = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                btn.textContent = '已复制';
+                setTimeout(() => btn.textContent = '复制', 1500);
+            });
+        }
+    </script>
+</body>
+</html>
